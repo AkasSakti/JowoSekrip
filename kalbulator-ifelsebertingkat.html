@@ -1,1 +1,75 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Sederhana</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        input {
+            margin: 5px;
+            padding: 8px;
+            width: 200px;
+        }
+        button {
+            padding: 10px;
+            margin: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Kalkulator Sederhana</h2>
+    <label for="num1">Masukkan Bilangan 1:</label>
+    <input type="number" id="num1"><br>
+
+    <label for="num2">Masukkan Bilangan 2:</label>
+    <input type="number" id="num2"><br>
+
+    <button onclick="hitung('+')">Tambah (+)</button>
+    <button onclick="hitung('-')">Kurang (-)</button>
+    <button onclick="hitung('*')">Kali (*)</button>
+    <button onclick="hitung('/')">Bagi (/)</button>
+
+    <h3>Hasil: <span id="hasil">0</span></h3>
+
+    <script>
+        function hitung(operator) {
+            let num1 = parseFloat(document.getElementById("num1").value);
+            let num2 = parseFloat(document.getElementById("num2").value);
+            let hasil = 0;
+
+            if (isNaN(num1) || isNaN(num2)) {
+                alert("Mohon masukkan angka yang valid!");
+                return;
+            }
+
+            if (operator === '+') {
+                hasil = num1 + num2;
+            } else if (operator === '-') {
+                hasil = num1 - num2;
+            } else if (operator === '*') {
+                hasil = num1 * num2;
+            } else if (operator === '/') {
+                if (num2 === 0) {
+                    alert("Tidak bisa membagi dengan nol!");
+                    return;
+                }
+                hasil = num1 / num2;
+            } else {
+                alert("Operator tidak valid!");
+                return;
+            }
+
+            document.getElementById("hasil").textContent = hasil;
+        }
+    </script>
+
+</body>
+</html>
 
