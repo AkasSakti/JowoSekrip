@@ -5,10 +5,10 @@
 E-commerce telah menjadi bagian tak terpisahkan dari kehidupan modern dalam hal transaksi jual beli produk. Platform seperti Lazada menyediakan tempat bagi pelanggan untuk memberikan ulasan mengenai produk yang mereka beli. Ulasan ini sangat berharga bagi calon pembeli maupun penjual dalam menilai kualitas produk. Namun, dengan jumlah ulasan yang sangat besar, sulit bagi manusia untuk membaca dan memahami semua opini pelanggan secara manual. Oleh karena itu, dibutuhkan sistem otomatis yang dapat mengklasifikasikan sentimen dari ulasan pelanggan untuk membantu pengambilan keputusan.
 
 **Rubrik/Kriteria Tambahan (Opsional)**:
-- Mengapa ulasan produk sangat penting dalam dunia pasar moderen yang bersifat online? dikarenakan ulasan produk akan memberikan rekomendasi yang dapat menarik minat pembeli untuk menggunakan jasa atau produk tertentu dengan rating tertentu.
-- Menyertakan hasil riset terkait atau referensi. Referensi yang diberikan harus berasal dari sumber yang kredibel dan author yang jelas.
+- Mengapa ulasan produk sangat penting dalam dunia pasar moderen yang bersifat online? dikarenakan ulasan produk akan memberikan rekomendasi yang dapat menarik minat pembeli untuk menggunakan jasa atau produk tertentu dengan rating tertentu. pada zaman moderen ini influencer juga berpengaruh pada daya untuk menarik minat pembeli sehingga ada baiknya jika customer lebih memerhatikan ulasan produk terlebih dahulu dibandingkan influencer.
+- Berdasarkan riset secara parsial maupun simultan variabel e- commerce, product review dan influencer secara bersama-sama berpengaruh terhadap keputusan pembelian melalui Marketplace Shopee. Saran yang dapat dikemukakan hendaknya konsumen berhati-hati untuk memilih penjual/seller, hendaknya masyarakat membaca dengan teliti mengenai rekomendasi yang diulas oleh konsumen yang telah membeli produk, hendaknya konsumen harus bijak menyikapi apakah produk yang dipromosikan influencer sesuai dengan kebutuhan.
   
-  Format Referensi: [Judul Referensi](https://scholar.google.com/) 
+Referensi: [Pengaruh E-Commerce, Product Review dan Influencer terhadap Keputusan Pembelian Melalui Marketplace Shopee (Studi Terhadap Masyarakat di Kampung Way Agung, Kabupaten Way Kanan)](https://jurnal.ubl.ac.id/index.php/jmv/article/view/3208) 
 
 ## Business Understanding
 
@@ -48,37 +48,49 @@ Selanjutnya uraikanlah seluruh variabel atau fitur pada data. Sebagai contoh:
 
 ### Variabel-variabel pada Restaurant UCI dataset adalah sebagai berikut:
 - Dataset ini berisi ulasan pelanggan terhadap produk di Lazada, dengan variable utama:
-•	reviewContent : Isi ulasan pelanggan.
-•	rating : Skor yang diberikan pelanggan (1-5).
-•	productName : Nama produk.
-•	reviewTime : Waktu ulasan dibuat.
-
+  1. reviewContent : Isi ulasan pelanggan.
+  2. rating : Skor yang diberikan pelanggan (1-5).
+  3. productName : Nama produk.
+  4. reviewTime : Waktu ulasan dibuat.
 
 **Rubrik/Kriteria Tambahan (Opsional)**:
 - •	Jumlah Data: 21406 ulasan.
 •	Kondisi Data: Terdapat nilai kosong yang perlu dihapus.
-•	Distribusi Sentimen: 
-                      o	Positif (rating 4-5): Mayoritas ulasan.
-                      o	Netral (rating 3): Lebih sedikit dibandingkan kategori lain.
-                      o	Negatif (rating 1-2): Ulasan dengan keluhan pelanggan.
+•	Distribusi Sentimen:
+1. Positif (rating 4-5): Mayoritas ulasan.
+2. Netral (rating 3): Lebih sedikit dibandingkan kategori lain.
+3. Negatif (rating 1-2): Ulasan dengan keluhan pelanggan.
 
 ## Data Preparation
 Pada bagian ini Anda menerapkan dan menyebutkan teknik data preparation yang dilakukan. Teknik yang digunakan pada notebook dan laporan harus berurutan.
 
 **Rubrik/Kriteria Tambahan (Opsional)**: 
-- •	Menghapus nilai kosong: Menghilangkan ulasan yang tidak memiliki teks.
-•	Mengonversi rating ke sentimen: 
-                                o	rating >= 4 → positive
-                                o	rating == 3 → neutral
-                                o	rating <= 2 → negative
-•	Membersihkan teks: 
-                    o	Konversi ke huruf kecil.
-                    o	Menghapus karakter khusus, angka, dan tanda baca.
-•	Membagi data menjadi training dan testing set (80% training, 20% testing).
-•	TF-IDF Vectorization untuk model NB dan SVM.
-•	Tokenization & Padding untuk model LSTM.
+- Menghapus nilai kosong: Menghilangkan ulasan yang tidak memiliki teks.
+- Mengonversi rating ke sentimen:
+  1. rating >= 4 → positive
+  2. rating == 3 → neutral
+  3. rating <= 2 → negative
+-	Membersihkan teks:
+  1. Konversi ke huruf kecil.
+  2. Menghapus karakter khusus, angka, dan tanda baca.
+-	Membagi data menjadi training dan testing set (80% training, 20% testing).
+-	TF-IDF Vectorization untuk model NB dan SVM.
+-	Tokenization & Padding untuk model LSTM.
 
 - Menjelaskan alasan mengapa diperlukan tahapan data preparation tersebut.
+1. Mengatasi Missing Values, Beberapa kolom dalam dataset memiliki nilai kosong (misalnya reviewTitle dan reviewContent). Jika tidak ditangani, model dapat mengalami kesalahan atau menghasilkan prediksi yang tidak akurat. Oleh karena itu, dilakukan penghapusan data yang tidak memiliki reviewContent karena ulasan adalah fitur utama dalam analisis sentimen.
+Mengonversi Tipe Data
+2. Kolom rating, awalnya berbentuk numerik dengan tipe data yang tidak sesuai. Oleh karena itu, dilakukan konversi ke tipe data integer agar lebih mudah digunakan dalam klasifikasi sentimen.
+3. Labeling Sentimen, Data ulasan tidak memiliki label sentimen secara eksplisit. Oleh karena itu, perlu dilakukan transformasi rating menjadi tiga kategori sentimen:
+   a. Positive (rating 4-5)
+   b. Neutral (rating 3)
+   c. Negative (rating 1-2)
+Labeling ini diperlukan agar model dapat memahami hubungan antara ulasan dan sentimen yang sesuai.
+4. Membersihkan Teks (Text Cleaning), Data teks dari ulasan sering mengandung karakter yang tidak relevan seperti simbol, angka, dan tanda baca. Oleh karena itu, dilakukan pembersihan teks agar model lebih fokus pada kata-kata yang bermakna dalam analisis sentimen.
+5. Transformasi Teks ke Representasi Numerik, Model machine learning tidak dapat memproses teks secara langsung, sehingga dilakukan transformasi teks ke dalam bentuk numerik menggunakan TF-IDF untuk model berbasis statistik (Naïve Bayes & SVM) dan Tokenization + Padding untuk model berbasis deep learning (LSTM).
+6. Pembagian Data (Train-Test Split), Untuk menghindari overfitting dan menguji kinerja model secara objektif, dataset dibagi menjadi dua bagian:
+   a. Training Set (80%): Digunakan untuk melatih model
+   b. Testing Set (20%): Digunakan untuk menguji performa model pada data yang belum pernah dilihat sebelumnya
 
 ## Modeling
 Tahapan ini membahas mengenai model machine learning yang digunakan untuk menyelesaikan permasalahan. Anda perlu menjelaskan tahapan dan parameter yang digunakan pada proses pemodelan.
