@@ -19,16 +19,16 @@ Bagian laporan ini mencakup:
 ### Problem Statements
 
 Menjelaskan pernyataan masalah latar belakang:
-- Pernyataan Masalah 1
-- Pernyataan Masalah 2
-- Pernyataan Masalah n
+- Bagaimana cara mengklasifikasikan ulasan pelanggan Lazada ke dalam kategori positif, negatif, dan netral?
+-	Bagaimana performa berbagai algoritma Machine Learning dalam analisis sentimen ulasan pelanggan?
+
 
 ### Goals
 
 Menjelaskan tujuan dari pernyataan masalah:
-- Jawaban pernyataan masalah 1
-- Jawaban pernyataan masalah 2
-- Jawaban pernyataan masalah n
+- Membangun model Machine Learning yang mampu mengklasifikasikan ulasan pelanggan secara otomatis.
+-	Membandingkan performa berbagai model untuk menentukan model terbaik.
+
 
 Semua poin di atas harus diuraikan dengan jelas. Anda bebas menuliskan berapa pernyataan masalah dan juga goals yang diinginkan.
 
@@ -36,45 +36,82 @@ Semua poin di atas harus diuraikan dengan jelas. Anda bebas menuliskan berapa pe
 - Menambahkan bagian “Solution Statement” yang menguraikan cara untuk meraih goals. Bagian ini dibuat dengan ketentuan sebagai berikut: 
 
     ### Solution statements
-    - Mengajukan 2 atau lebih solution statement. Misalnya, menggunakan dua atau lebih algoritma untuk mencapai solusi yang diinginkan atau melakukan improvement pada baseline model dengan hyperparameter tuning.
-    - Solusi yang diberikan harus dapat terukur dengan metrik evaluasi.
+    - Menggunakan Naïve Bayes (NB), Support Vector Machine (SVM), dan Long Short-Term Memory (LSTM) untuk klasifikasi sentimen.
+    - Menggunakan TF-IDF sebagai teknik ekstraksi fitur untuk model NB dan SVM
+    - Menggunakan Tokenization & Embedding untuk LSTM agar dapat menangkap makna kontekstual dalam teks.
+    - Melakukan evaluasi model menggunakan metrik akurasi, precision, recall, dan F1-score.
 
 ## Data Understanding
-Paragraf awal bagian ini menjelaskan informasi mengenai data yang Anda gunakan dalam proyek. Sertakan juga sumber atau tautan untuk mengunduh dataset. Contoh: [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets/Restaurant+%26+consumer+data).
+Paragraf awal bagian ini menjelaskan informasi mengenai data yang Anda gunakan dalam proyek. Sertakan juga sumber atau tautan untuk mengunduh dataset. Dataset yang digunakan berasal dari Kaggle: https://www.kaggle.com/datasets/grikomsn/lazada-indonesian-reviews?select=20191002-reviews.csv.
 
 Selanjutnya uraikanlah seluruh variabel atau fitur pada data. Sebagai contoh:  
 
 ### Variabel-variabel pada Restaurant UCI dataset adalah sebagai berikut:
-- accepts : merupakan jenis pembayaran yang diterima pada restoran tertentu.
-- cuisine : merupakan jenis masakan yang disajikan pada restoran.
-- dst
+- Dataset ini berisi ulasan pelanggan terhadap produk di Lazada, dengan variable utama:
+•	reviewContent : Isi ulasan pelanggan.
+•	rating : Skor yang diberikan pelanggan (1-5).
+•	productName : Nama produk.
+•	reviewTime : Waktu ulasan dibuat.
+
 
 **Rubrik/Kriteria Tambahan (Opsional)**:
-- Melakukan beberapa tahapan yang diperlukan untuk memahami data, contohnya teknik visualisasi data atau exploratory data analysis.
+- •	Jumlah Data: 21406 ulasan.
+•	Kondisi Data: Terdapat nilai kosong yang perlu dihapus.
+•	Distribusi Sentimen: 
+                      o	Positif (rating 4-5): Mayoritas ulasan.
+                      o	Netral (rating 3): Lebih sedikit dibandingkan kategori lain.
+                      o	Negatif (rating 1-2): Ulasan dengan keluhan pelanggan.
 
 ## Data Preparation
 Pada bagian ini Anda menerapkan dan menyebutkan teknik data preparation yang dilakukan. Teknik yang digunakan pada notebook dan laporan harus berurutan.
 
 **Rubrik/Kriteria Tambahan (Opsional)**: 
-- Menjelaskan proses data preparation yang dilakukan
+- •	Menghapus nilai kosong: Menghilangkan ulasan yang tidak memiliki teks.
+•	Mengonversi rating ke sentimen: 
+                                o	rating >= 4 → positive
+                                o	rating == 3 → neutral
+                                o	rating <= 2 → negative
+•	Membersihkan teks: 
+                    o	Konversi ke huruf kecil.
+                    o	Menghapus karakter khusus, angka, dan tanda baca.
+•	Membagi data menjadi training dan testing set (80% training, 20% testing).
+•	TF-IDF Vectorization untuk model NB dan SVM.
+•	Tokenization & Padding untuk model LSTM.
+
 - Menjelaskan alasan mengapa diperlukan tahapan data preparation tersebut.
 
 ## Modeling
 Tahapan ini membahas mengenai model machine learning yang digunakan untuk menyelesaikan permasalahan. Anda perlu menjelaskan tahapan dan parameter yang digunakan pada proses pemodelan.
+Model yang digunakan:
+•	Naïve Bayes (NB): Model probabilistik berbasis TF-IDF.
+•	Support Vector Machine (SVM): Model klasifikasi berbasis hyperplane optimal.
+•	Long Short-Term Memory (LSTM): Model deep learning berbasis RNN untuk menangkap konteks dalam teks.
+
 
 **Rubrik/Kriteria Tambahan (Opsional)**: 
 - Menjelaskan kelebihan dan kekurangan dari setiap algoritma yang digunakan.
+  - Naïve Bayes: Kelebihan	Cepat dan sederhana, Kekurangan	Kurang akurat untuk teks kompleks
+  - SVM: Kelebihan Akurat dalam data terbatas, Kekurangan Waktu komputasi lebih lama
+  - LSTM: Kelebihan	Memahami konteks kalimat, Kekurangan Membutuhkan lebih banyak data dan komputasi
+
 - Jika menggunakan satu algoritma pada solution statement, lakukan proses improvement terhadap model dengan hyperparameter tuning. **Jelaskan proses improvement yang dilakukan**.
 - Jika menggunakan dua atau lebih algoritma pada solution statement, maka pilih model terbaik sebagai solusi. **Jelaskan mengapa memilih model tersebut sebagai model terbaik**.
+- Model terbaik dipilih berdasarkan evaluasi metrik. SVM memiliki akurasi tertinggi (97%) dengan keseimbangan precision, recall, dan F1-score yang baik
 
 ## Evaluation
 Pada bagian ini anda perlu menyebutkan metrik evaluasi yang digunakan. Lalu anda perlu menjelaskan hasil proyek berdasarkan metrik evaluasi yang digunakan.
 
-Sebagai contoh, Anda memiih kasus klasifikasi dan menggunakan metrik **akurasi, precision, recall, dan F1 score**. Jelaskan mengenai beberapa hal berikut:
-- Penjelasan mengenai metrik yang digunakan
-- Menjelaskan hasil proyek berdasarkan metrik evaluasi
+Saya memiih kasus klasifikasi dan menggunakan metrik **akurasi, precision, recall, dan F1 score**. Jelaskan mengenai beberapa hal berikut:
+- Accuracy: Persentase prediksi yang benar
+- Precision: Proporsi prediksi positif yang benar.
+- Recall: Kemampuan model mendeteksi kategori tertentu.
+- F1-Score: Rata-rata harmonik antara precision dan recall
 
-Ingatlah, metrik evaluasi yang digunakan harus sesuai dengan konteks data, problem statement, dan solusi yang diinginkan.
+- Menjelaskan hasil proyek berdasarkan metrik evaluasi
+1. Naïve Bayes: Accuracy 90%, Precision 90%, Recall 90%, F1-Score 87%
+2. SVM: Accuracy 97%, Precision 97%, Recall97%, F1-Score 97%
+3. LSTM: Accuracy 96%, Precision 96%, Recall 96%, F1-Score 96%
+Dari hasil evaluasi, SVM adalah model terbaik dengan akurasi dan F1-score tertinggi. Model ini dapat digunakan untuk mengotomatisasi analisis sentimen pada ulasan pelanggan Lazada dengan tingkat akurasi yang sangat tinggi.
 
 **Rubrik/Kriteria Tambahan (Opsional)**: 
 - Menjelaskan formula metrik dan bagaimana metrik tersebut bekerja.
