@@ -1,11 +1,11 @@
-# Laporan Proyek Machine Learning - Nama Anda
+# Laporan Proyek Machine Learning Terapan - Akas Bagus Setiawan
 
 ## Domain Proyek
 
-Pada bagian ini, kamu perlu menuliskan latar belakang yang relevan dengan proyek yang diangkat.
+E-commerce telah menjadi bagian tak terpisahkan dari kehidupan modern dalam hal transaksi jual beli produk. Platform seperti Lazada menyediakan tempat bagi pelanggan untuk memberikan ulasan mengenai produk yang mereka beli. Ulasan ini sangat berharga bagi calon pembeli maupun penjual dalam menilai kualitas produk. Namun, dengan jumlah ulasan yang sangat besar, sulit bagi manusia untuk membaca dan memahami semua opini pelanggan secara manual. Oleh karena itu, dibutuhkan sistem otomatis yang dapat mengklasifikasikan sentimen dari ulasan pelanggan untuk membantu pengambilan keputusan.
 
 **Rubrik/Kriteria Tambahan (Opsional)**:
-- Jelaskan mengapa dan bagaimana masalah tersebut harus diselesaikan
+- Mengapa ulasan produk sangat penting dalam dunia pasar moderen yang bersifat online? dikarenakan ulasan produk akan memberikan rekomendasi yang dapat menarik minat pembeli untuk menggunakan jasa atau produk tertentu dengan rating tertentu.
 - Menyertakan hasil riset terkait atau referensi. Referensi yang diberikan harus berasal dari sumber yang kredibel dan author yang jelas.
   
   Format Referensi: [Judul Referensi](https://scholar.google.com/) 
